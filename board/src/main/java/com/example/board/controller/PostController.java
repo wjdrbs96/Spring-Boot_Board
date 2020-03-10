@@ -15,10 +15,24 @@ public class PostController {
 
     @RequestMapping(value = "post/list", method = RequestMethod.GET)
     public String getAllPost(Model model,
-                             @RequestParam("page") int page,
-                             @RequestParam("pageSize") int pageSize) throws Exception {
+                             @RequestParam(value = "page", defaultValue = "1") int page,
+                             @RequestParam(value = "pageSize", defaultValue = "1") int pageSize) throws Exception {
+
+        int totalPostCount = PostDAO.PostAllcount();               // 전체 게시글 수
+        int totalCount = totalPostCount / pageSize + 1;            // 총 페이지 수
         List<Post> postList = PostDAO.findAll(page, pageSize);
         model.addAttribute("posts", postList);
+        model.addAttribute("pageSize", pageSize);
+        model.addAttribute("page", page);
+        model.addAttribute("totalPage", totalCount);
         return "postMain";
     }
+
+    @RequestMapping(value = "post/list", method = RequestMethod.POST)
+    public String findBytitle(Model model, @RequestParam("srchText") String srchText) throws Exception {
+        List<Post> posts = PostDAO.findBytitle(srchText, 1, 4);
+        model.addAttribute("posts", posts);
+        return "postMain";
+    }
+
 }

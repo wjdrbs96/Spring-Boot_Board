@@ -20,13 +20,16 @@ public class MemberDAO {
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
                     dbpw = resultSet.getString("password");
-                    if (dbpw.equals(pwd))
+                    if (dbpw.equals(pwd)) {
                         return 1;              // 아이디와 비번이 같을 때
-
-                    else
+                    }
+                    else {
                         return 0;              // 아이디와 비번이 다를 때
-                } else
+                    }
+                }
+                else {
                     return -1;                // 아이디가 존재하지 않을 때
+                }
             }
         }
 

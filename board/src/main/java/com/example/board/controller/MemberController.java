@@ -1,7 +1,6 @@
 package com.example.board.controller;
 
 import DAO.MemberDAO;
-import com.example.board.model.Member;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,6 +42,5 @@ public class MemberController {
 
         session.setAttribute("userid", userid);
         return "postMain";
-        //TODO 로그인 실패시 loginForm
     }
 }

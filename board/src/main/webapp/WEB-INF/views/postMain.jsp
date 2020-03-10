@@ -33,15 +33,13 @@
 
 <div class="container">
 
-   <%-- <form class="form-inline">
+    <form method="post" class="form-inline">
         <div class="form-group">
             <label>검색</label>
-            <input type="text" size=20 class="form-control" name="srchText" value="<%= srchText %>" placeholder="제목을 입력하세요" >
+            <input type="text" size=20 class="form-control" name="srchText" value="${srchText}" placeholder="제목을 입력하세요" >
         </div>
         <button type="submit" class="btn btn-primary">조회</button>
     </form>
---%>
-
 
     <table class="table table-hover table table-striped">
 
@@ -66,11 +64,12 @@
 
     </table>
 
-<%--    <a href="WritePost.jsp" class="btn btn-default pull-right">글쓰기</a>--%>
+   <%-- <a href="WritePost.jsp" class="btn btn-default pull-right">글쓰기</a>--%>
+
     <ul class="pagination">
        <c:forEach var="i" begin="1" end="${totalPage}" step="1">
            <li class=<c:if test='${i} == ${page} ? "active" : ""'/>>
-               <a href='/user/list?pageSize=${pageSize}&page=${i}'>${i}</a>
+               <a href='/post/list?page=${i}&pageSize=${pageSize}'>${i}</a>
            </li>
        </c:forEach>
     </ul>
