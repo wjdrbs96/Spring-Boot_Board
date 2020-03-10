@@ -50,4 +50,19 @@ public class PostController {
         return "postView";
     }
 
+    @RequestMapping(value = "post/View", method = RequestMethod.POST)
+    public String PostView(@RequestParam("id") String id,
+                           @RequestParam("title") String title,
+                           @RequestParam("content") String content) throws Exception {
+
+        Post post = new Post();
+        post.setPostId(Integer.parseInt(id));
+        post.setTitle(title);
+        post.setContent(content);
+        PostDAO.PostUpdate(post);
+
+        return "postMain";
+
+    }
+
 }

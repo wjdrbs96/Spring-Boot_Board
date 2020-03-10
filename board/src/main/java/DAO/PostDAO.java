@@ -123,4 +123,22 @@ public class PostDAO {
         return null;
 
     }
+
+    public static void PostUpdate(Post post) throws Exception {
+
+        String sql = "Update post " +
+                     "set title = ?, content = ? " +
+                     "where postId = ?";
+
+
+        try (Connection connection = DB.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, post.getTitle());
+            statement.setString(2, post.getContent());
+            statement.setLong(3, post.getPostId());
+            statement.executeUpdate();
+        }
+
+
+    }
 }

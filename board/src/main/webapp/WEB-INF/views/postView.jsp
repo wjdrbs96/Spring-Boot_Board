@@ -44,13 +44,13 @@
             <tr>
                 <td>작성자</td>
                 <td>
-                    <input type="text" name="name" class="form-control"  value="${posts.getName()}" >
+                    ${posts.getName()}
                 </td>
             </tr>
             <tr>
                 <td>작성시간</td>
                 <td>
-                    <input type="text" name="time" class="form-control" >
+
                 </td>
             </tr>
         </table>
