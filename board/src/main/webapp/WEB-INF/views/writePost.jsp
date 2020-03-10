@@ -48,7 +48,7 @@
                 </td>
             </tr>
             <tr>
-                <td>작성자번호</td>
+                <td>작성자 번호</td>
                 <td>
                     <input type="text" name="number" value="" class="form-control" >
                 </td>
@@ -56,7 +56,7 @@
             <tr>
                 <td>작성시간</td>
                 <td>
-                    <input type="text" name="time" class="form-control" value="">
+                    <input type="text" name="time" value="" class="form-control" >
                 </td>
             </tr>
         </table>

@@ -1,5 +1,6 @@
 package com.example.board.controller;
 
+import DAO.MemberDAO;
 import DAO.PostDAO;
 import com.example.board.model.Post;
 import org.springframework.stereotype.Controller;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -41,6 +43,18 @@ public class PostController {
     @RequestMapping(value = "post/write", method = RequestMethod.GET)
     public String PostWrite() {
         return "writePost";
+    }
+
+    @RequestMapping(value = "post/write", method = RequestMethod.POST)
+    public String PostWrite(@RequestParam("title") String title,
+                            @RequestParam("content") String content,
+                            @RequestParam("name") String name) throws Exception {
+        Post post = new Post();
+        post.setTitle(title);
+        post.setContent(content);
+        post.setName(name);
+        PostDAO.insertPost(post);
+        return "postMain";
     }
 
     @RequestMapping(value = "post/View", method = RequestMethod.GET)

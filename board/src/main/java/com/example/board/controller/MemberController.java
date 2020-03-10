@@ -1,6 +1,7 @@
 package com.example.board.controller;
 
 import DAO.MemberDAO;
+import com.example.board.model.Post;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,4 +44,6 @@ public class MemberController {
         session.setAttribute("userid", userid);
         return "postMain";
     }
+
+
 }
