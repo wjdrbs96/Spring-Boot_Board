@@ -64,7 +64,7 @@
 
     </table>
 
-   <%-- <a href="WritePost.jsp" class="btn btn-default pull-right">글쓰기</a>--%>
+    <a href="http://localhost:8081/post/write" class="btn btn-default pull-right">글쓰기</a>
 
     <ul class="pagination">
        <c:forEach var="i" begin="1" end="${totalPage}" step="1">

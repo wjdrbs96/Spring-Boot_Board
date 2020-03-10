@@ -13,6 +13,7 @@ import java.util.List;
 @Controller
 public class PostController {
 
+    // 게시글 전부 찾기
     @RequestMapping(value = "post/list", method = RequestMethod.GET)
     public String getAllPost(Model model,
                              @RequestParam(value = "page", defaultValue = "1") int page,
@@ -28,11 +29,18 @@ public class PostController {
         return "postMain";
     }
 
+    // 게시글 검색
     @RequestMapping(value = "post/list", method = RequestMethod.POST)
     public String findBytitle(Model model, @RequestParam("srchText") String srchText) throws Exception {
         List<Post> posts = PostDAO.findBytitle(srchText, 1, 4);
         model.addAttribute("posts", posts);
         return "postMain";
+    }
+
+    // 게시글 쓰기
+    @RequestMapping(value = "post/write", method = RequestMethod.GET)
+    public String PostWrite() {
+        return "writePost";
     }
 
 }
