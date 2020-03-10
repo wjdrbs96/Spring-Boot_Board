@@ -32,7 +32,7 @@ public class PostController {
     // 게시글 검색
     @RequestMapping(value = "post/list", method = RequestMethod.POST)
     public String findBytitle(Model model, @RequestParam("srchText") String srchText) throws Exception {
-        List<Post> posts = PostDAO.findBytitle(srchText, 1, 4);
+        List<Post> posts = PostDAO.PostfindBytitle(srchText, 1, 4);
         model.addAttribute("posts", posts);
         return "postMain";
     }
@@ -41,6 +41,13 @@ public class PostController {
     @RequestMapping(value = "post/write", method = RequestMethod.GET)
     public String PostWrite() {
         return "writePost";
+    }
+
+    @RequestMapping(value = "post/View", method = RequestMethod.GET)
+    public String PostView(Model model, @RequestParam("id") String ID) throws Exception {
+        Post post = PostDAO.findByPostId(Integer.parseInt(ID));
+        model.addAttribute("posts", post);
+        return "postView";
     }
 
 }

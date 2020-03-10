@@ -56,7 +56,7 @@
             <tr>
                 <th>${post.getPostId()}</th>
                 <th>${post.getMemberId()}</th>
-                <th><a href="PostView.jsp?id=${post.getPostId()}">${post.getTitle()}</a></th>
+                <th><a href="http://localhost:8081/post/View?id=${post.getPostId()}">${post.getTitle()}</a></th>
                 <th>${post.getCount()}</th>
                 <th>${post.getCreateDateTime()}</th>
             </tr

@@ -58,7 +58,7 @@ public class PostDAO {
         return 0;
     }
 
-    public static List<Post> findBytitle(String name, int currentPage, int pageSize) throws Exception {
+    public static List<Post> PostfindBytitle(String name, int currentPage, int pageSize) throws Exception {
         String sql = "select * " +
                      "from post " +
                      "where title Like ? or title Like ? or title Like ? " +
@@ -91,6 +91,36 @@ public class PostDAO {
             }
 
         }
+
+    }
+
+    public static Post findByPostId(int id) throws Exception {
+        String sql = "select p.postId, p.title, p.content, p.count, m.name, p.createDateTime " +
+                     "from member m join post p on m.memberId = p.memberId " +
+                     "where p.postId = ?";
+
+        try (Connection connection = DB.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, id);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    Post post = new Post();
+                    post.setPostId(resultSet.getLong("postId"));
+                    post.setTitle(resultSet.getString("title"));
+                    post.setContent(resultSet.getString("content"));
+                    post.setCount(resultSet.getInt("count"));
+                    post.setName(resultSet.getString("name"));
+                    post.setCreateDateTime(resultSet.getDate("createDateTime"));
+                    return post;
+
+                }
+
+
+            }
+
+        }
+
+        return null;
 
     }
 }
