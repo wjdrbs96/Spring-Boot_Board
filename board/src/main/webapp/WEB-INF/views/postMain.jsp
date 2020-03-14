@@ -35,7 +35,7 @@
 
     <form method="post" class="form-inline">
         <div class="form-group">
-            <label>검색</label>
+            <label><a href="http://localhost:8081/post/list">검색</a></label>
             <input type="text" size=20 class="form-control" name="srchText"  placeholder="제목을 입력하세요" >
         </div>
         <button type="submit" class="btn btn-primary">조회</button>

@@ -1,6 +1,5 @@
 package com.example.board.controller;
 
-import DAO.MemberDAO;
 import DAO.PostDAO;
 import com.example.board.model.Post;
 import org.springframework.stereotype.Controller;
@@ -8,8 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -23,7 +20,7 @@ public class PostController {
 
         int totalPostCount = PostDAO.PostAllcount();               // 전체 게시글 수
         int totalCount = totalPostCount / pageSize + 1;            // 총 페이지 수
-        List<Post> postList = PostDAO.findAll(page, pageSize);
+        List<Post> postList = PostDAO.findAll(1, 3);
         model.addAttribute("posts", postList);
         model.addAttribute("pageSize", pageSize);
         model.addAttribute("page", page);
@@ -57,6 +54,7 @@ public class PostController {
         return "postMain";
     }
 
+    // 게시글 id 찾기
     @RequestMapping(value = "post/View", method = RequestMethod.GET)
     public String PostView(Model model, @RequestParam("id") String ID) throws Exception {
         Post post = PostDAO.findByPostId(Integer.parseInt(ID));
@@ -78,5 +76,12 @@ public class PostController {
         return "postMain";
 
     }
+
+    /*
+    @RequestMapping(value = "post/delete", method = RequestMethod.GET)
+    public String PostDelete() {
+
+    }
+    */
 
 }
