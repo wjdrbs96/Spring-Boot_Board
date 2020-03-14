@@ -20,7 +20,7 @@
 
     <h1>게시글 수정</h1>
 
-    <form method="post">
+    <form action="http://localhost:8081/post/list" method="GET">
         <table class="table table-bordered table-condensed">
             <tr>
                 <td>게시글 번호</td>

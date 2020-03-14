@@ -18,13 +18,13 @@ public class PostController {
                              @RequestParam(value = "page", defaultValue = "1") int page,
                              @RequestParam(value = "pageSize", defaultValue = "1") int pageSize) throws Exception {
 
-        int totalPostCount = PostDAO.PostAllcount();               // 전체 게시글 수
-        int totalCount = totalPostCount / pageSize + 1;            // 총 페이지 수
+        /*int totalPostCount = PostDAO.PostAllcount();               // 전체 게시글 수
+        int totalCount = totalPostCount / pageSize + 1;*/            // 총 페이지 수
         List<Post> postList = PostDAO.findAll(1, 3);
         model.addAttribute("posts", postList);
-        model.addAttribute("pageSize", pageSize);
+        /*model.addAttribute("pageSize", pageSize);
         model.addAttribute("page", page);
-        model.addAttribute("totalPage", totalCount);
+        model.addAttribute("totalPage", totalCount);*/
         return "postMain";
     }
 
