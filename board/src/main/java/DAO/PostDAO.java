@@ -6,6 +6,7 @@ import com.example.board.model.Post;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -138,6 +139,17 @@ public class PostDAO {
             statement.setString(2, post.getTitle());
             statement.setString(3, post.getContent());
             statement.setInt(4, 1);
+            statement.executeUpdate();
+        }
+    }
+
+    public static void deletePost(long postId) throws SQLException {
+        String sql = "delete from post " +
+                     "where postId = ?";
+
+        try (Connection connection = DB.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setLong(1, postId);
             statement.executeUpdate();
         }
     }

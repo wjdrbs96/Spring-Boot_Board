@@ -28,7 +28,7 @@
             </tr>
         </c:forEach>
     </table>
-    <%--<a href="PostView.jsp?id=<%= id %>" class="btn btn-info">돌아가기</a>--%>
+    <a href="javascript:window.history.back()" class="btn btn-info">돌아가기</a>
 </div>
 </body>
 </html>

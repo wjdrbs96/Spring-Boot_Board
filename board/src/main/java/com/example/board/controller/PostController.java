@@ -1,5 +1,6 @@
 package com.example.board.controller;
 
+import DAO.CommentDAO;
 import DAO.PostDAO;
 import com.example.board.model.Post;
 import org.springframework.stereotype.Controller;
@@ -76,11 +77,19 @@ public class PostController {
         return "redirect:/post/list";
     }
 
-    /*
     @RequestMapping(value = "post/delete", method = RequestMethod.GET)
-    public String PostDelete() {
-
+    public String postDelete(@RequestParam("postId") int postId) throws Exception {
+        Post post = PostDAO.findByPostId(postId);
+        PostDAO.deletePost(post.getPostId());
+        return "redirect:/post/comment/delete";
     }
-    */
+
+    @RequestMapping(value = "post/comment/delete", method = RequestMethod.GET)
+    public String postCommentDelete(@RequestParam("postId") int postId) throws Exception {
+        CommentDAO.postCommentDelete(postId);
+
+        return "redirect:/post/list";
+    }
+
 
 }

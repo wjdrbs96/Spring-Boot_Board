@@ -51,7 +51,7 @@
 
         <button type="submit" class="btn btn-primary">저장</button>
         <a href="http://localhost:8081/comment/list?postId=${posts.getPostId()}" class="btn btn-warning">댓글</a>
-        <a href="PostDelete.jsp?id=" class="btn btn-warning" onclick="confirm('삭제하시겠습니까?')">삭제</a>
+        <a href="http://localhost:8081/post/delete?postId=${posts.getPostId()}" class="btn btn-warning" onclick="confirm('삭제하시겠습니까?')">삭제</a>
         <a href="javascript:window.history.back()" class="btn btn-info">돌아가기</a>
     </form>
 

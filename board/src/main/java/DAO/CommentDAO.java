@@ -51,4 +51,15 @@ public class CommentDAO {
         }
     }
 
+    public static void postCommentDelete(int postId) throws Exception{
+        String sql = "delete from comment " +
+                     "where postId = ?";
+
+        try (Connection connection = DB.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, postId);
+            statement.executeUpdate();
+        }
+    }
+
 }
