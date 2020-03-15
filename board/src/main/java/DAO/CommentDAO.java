@@ -12,7 +12,7 @@ import java.util.List;
 
 public class CommentDAO {
 
-    public static void CommentInsert(String comment, int postID) throws Exception {
+    public static void commentInsert(String comment, int postID) throws Exception {
         Post post = PostDAO.findByPostId(postID);
 
         String sql = "insert into comment(postId, memberId, content) " +
@@ -30,14 +30,14 @@ public class CommentDAO {
 
     }
 
-    public static List<Comment> findComment(int ID) throws Exception {
+    public static List<Comment> findAllComment(int postId) throws Exception {
         String sql = "select c.commentid, c.content " +
                      "from comment c " +
-                     "where commentid = ?";
+                     "where c.postId = ?";
 
         try (Connection connection = DB.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setInt(1, ID);
+            statement.setInt(1, postId);
             List<Comment> list = new LinkedList<>();
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
@@ -45,15 +45,10 @@ public class CommentDAO {
                     comment.setCommentId(resultSet.getInt("commentid"));
                     comment.setContent(resultSet.getString("content"));
                     list.add(comment);
-                    return list;
                 }
-
-
+                return list;
             }
-
         }
-
-        return null;
     }
 
 }

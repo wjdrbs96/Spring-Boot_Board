@@ -13,20 +13,19 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class MemberController {
 
+    // 로그인 페이지 GET
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginPage() {
         return "loginForm";
     }
 
+    // 로그인 POST 요청
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(HttpSession session,
-                        Model model,
+    public String login(HttpSession session, Model model,
                         @RequestParam("userid") String userid,
                         @RequestParam("password") String password) throws Exception {
-        //TODO 로그인 성공시 postMain
 
         int num = MemberDAO.loginCheck(userid, password);
-
         String errorMsg = null;
 
         if (num == 0) {
@@ -42,7 +41,7 @@ public class MemberController {
         }
 
         session.setAttribute("userid", userid);
-        return "postMain";
+        return "redirect:/post/list";
     }
 
 

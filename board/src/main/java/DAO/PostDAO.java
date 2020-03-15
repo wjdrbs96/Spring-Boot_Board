@@ -13,7 +13,7 @@ public class PostDAO {
 
     public static List<Post> findAll(int page, int pageSize) throws Exception {
         String sql = "select * from post " +
-                     "Limit ?, ?";
+                     "limit ?, ?";
 
 
         // 코드 실행하다 보면 name=""으로 넘어오는 경우가 있어서 만듬
@@ -35,15 +35,13 @@ public class PostDAO {
 
                     list.add(post);
                 }
-
                 return list;
             }
 
         }
     }
 
-    public static int PostAllcount() throws Exception {
-
+    public static int postAllCount() throws Exception {
         String sql = "select count(postId) " +
                      "from post ";
 
@@ -54,15 +52,14 @@ public class PostDAO {
                      return resultSet.getInt(1);
              }
         }
-
         return 0;
     }
 
-    public static List<Post> PostfindBytitle(String name, int currentPage, int pageSize) throws Exception {
+    public static List<Post> postFindByTitle(String name, int currentPage, int pageSize) throws Exception {
         String sql = "select * " +
                      "from post " +
-                     "where title Like ? or title Like ? or title Like ? " +
-                     "Limit ?, ?";
+                     "where title like ? or title like ? or title like ? " +
+                     "limit ?, ?";
 
         if (name == "") name = null;         // 코드 실행하다 보면 name=""으로 넘어오는 경우가 있어서 만듬
         try (Connection connection = DB.getConnection();
@@ -86,12 +83,9 @@ public class PostDAO {
 
                     list.add(post);
                 }
-
                 return list;
             }
-
         }
-
     }
 
     public static Post findByPostId(int id) throws Exception {
@@ -112,24 +106,17 @@ public class PostDAO {
                     post.setName(resultSet.getString("name"));
                     post.setCreateDateTime(resultSet.getDate("createDateTime"));
                     return post;
-
                 }
-
-
             }
-
         }
-
         return null;
-
     }
 
-    public static void PostUpdate(Post post) throws Exception {
-
-        String sql = "Update post " +
+    // 게시글 수정
+    public static void postUpdate(Post post) throws Exception {
+        String sql = "update post " +
                      "set title = ?, content = ? " +
                      "where postId = ?";
-
 
         try (Connection connection = DB.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -138,10 +125,9 @@ public class PostDAO {
             statement.setLong(3, post.getPostId());
             statement.executeUpdate();
         }
-
-
     }
 
+    // 글쓰기
     public static void insertPost(Post post) throws Exception {
         String sql = "insert post(memberId, title, content, count) " +
                      "values(?, ?, ?, ?)";

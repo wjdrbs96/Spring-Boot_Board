@@ -46,12 +46,14 @@
             <th>날짜</th>
         </tr>
 
-        <c:forEach items="${posts}" var="post">
-            <tr>
-                <th>${post.getPostId()}</th>
-                <th>${post.getMemberId()}</th>
-                <th><a href="http://localhost:8081/post/View?id=${post.getPostId()}">${post.getTitle()}</a></th>
-                <th>${post.getCount()}</th>
+            <c:forEach items="${posts}" var="post">
+                <tr>
+                    <th>${post.getPostId()}</th>
+                    <th>${post.getMemberId()}</th>
+                    <th>
+                        <a href="http://localhost:8081/post/View?postId=${post.getPostId()}">${post.getTitle()}</a>
+                    </th>
+                    <th>${post.getCount()}</th>
                 <th>${post.getCreateDateTime()}</th>
             </tr>
         </c:forEach>
@@ -60,13 +62,13 @@
 
     <a href="http://localhost:8081/post/write" class="btn btn-default pull-right">글쓰기</a>
 
-    <%--<ul class="pagination">
+    <ul class="pagination">
        <c:forEach var="i" begin="1" end="${totalPage}" step="1">
            <li class=<c:if test='${i} == ${page} ? "active" : ""'/>>
                <a href='/post/list?page=${i}&pageSize=${pageSize}'>${i}</a>
            </li>
        </c:forEach>
-    </ul>--%>
+    </ul>
 </div>
 </body>
 </html>

@@ -21,10 +21,10 @@
 
     <h1>댓글 목록 </h1>
     <table class="table table-bordered table-condensed">
-        <c:forEach items="${list}" var="list" varStatus="i" begin="0" end="2" step="1">
+        <c:forEach items="${list}" var="comment">
             <tr>
-                <th>${list.get(i).getCommentId()}</th>
-                <th>${list.get(i).getContent()}</th>
+                <th>${comment.getCommentId()}</th>
+                <th>${comment.getContent()}</th>
             </tr>
         </c:forEach>
     </table>

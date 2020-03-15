@@ -16,22 +16,24 @@ public class PostController {
     @RequestMapping(value = "post/list", method = RequestMethod.GET)
     public String getAllPost(Model model,
                              @RequestParam(value = "page", defaultValue = "1") int page,
-                             @RequestParam(value = "pageSize", defaultValue = "1") int pageSize) throws Exception {
+                             @RequestParam(value = "pageSize", defaultValue = "5") int pageSize) throws Exception {
 
-        /*int totalPostCount = PostDAO.PostAllcount();               // 전체 게시글 수
-        int totalCount = totalPostCount / pageSize + 1;*/            // 총 페이지 수
-        List<Post> postList = PostDAO.findAll(1, 3);
+        // 페이지네이션 포함
+        int totalPostCount = PostDAO.postAllCount();               // 전체 게시글 수
+        int totalCount = totalPostCount / pageSize + 1;            // 총 페이지 수
+        List<Post> postList = PostDAO.findAll(page, pageSize);
+
         model.addAttribute("posts", postList);
-        /*model.addAttribute("pageSize", pageSize);
+        model.addAttribute("pageSize", pageSize);
         model.addAttribute("page", page);
-        model.addAttribute("totalPage", totalCount);*/
+        model.addAttribute("totalPage", totalCount);
         return "postMain";
     }
 
     // 게시글 검색
     @RequestMapping(value = "post/list", method = RequestMethod.POST)
-    public String findBytitle(Model model, @RequestParam("srchText") String srchText) throws Exception {
-        List<Post> posts = PostDAO.PostfindBytitle(srchText, 1, 4);
+    public String findByTitle(Model model, @RequestParam("srchText") String srchText) throws Exception {
+        List<Post> posts = PostDAO.postFindByTitle(srchText, 1, 4);
         model.addAttribute("posts", posts);
         return "postMain";
     }
@@ -56,25 +58,22 @@ public class PostController {
 
     // 게시글 id 찾기
     @RequestMapping(value = "post/View", method = RequestMethod.GET)
-    public String PostView(Model model, @RequestParam("id") String ID) throws Exception {
-        Post post = PostDAO.findByPostId(Integer.parseInt(ID));
+    public String PostView(Model model, @RequestParam("postId") int postId) throws Exception {
+        Post post = PostDAO.findByPostId(postId);
         model.addAttribute("posts", post);
         return "postView";
     }
 
-    @RequestMapping(value = "post/View", method = RequestMethod.POST)
-    public String PostView(@RequestParam("id") String id,
-                           @RequestParam("title") String title,
-                           @RequestParam("content") String content) throws Exception {
-
-        Post post = new Post();
-        post.setPostId(Integer.parseInt(id));
+    @RequestMapping(value = "update", method = RequestMethod.POST)
+    public String postUpdate(@RequestParam("postId") int postId,
+                             @RequestParam("title") String title,
+                             @RequestParam("content") String content) throws Exception {
+        Post post = PostDAO.findByPostId(postId);
         post.setTitle(title);
         post.setContent(content);
-        PostDAO.PostUpdate(post);
 
-        return "postMain";
-
+        PostDAO.postUpdate(post);
+        return "redirect:/post/list";
     }
 
     /*
