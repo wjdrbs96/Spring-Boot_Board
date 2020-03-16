@@ -8,6 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -41,18 +44,23 @@ public class PostController {
 
     // 게시글 쓰기
     @RequestMapping(value = "post/write", method = RequestMethod.GET)
-    public String PostWrite() {
+    public String PostWrite(Model model, HttpServletRequest request) throws Exception {
+        HttpSession session = request.getSession();
+        String userId = (String) session.getAttribute("userid");
+        Post post = PostDAO.findPostByLoginId(userId);
+        System.out.println(post.getMemberId());
+        System.out.println(post.getName());
+        model.addAttribute("post", post);
         return "writePost";
     }
 
     @RequestMapping(value = "post/write", method = RequestMethod.POST)
     public String PostWrite(@RequestParam("title") String title,
-                            @RequestParam("content") String content,
-                            @RequestParam("name") String name) throws Exception {
+                            @RequestParam("content") String content) throws Exception {
         Post post = new Post();
         post.setTitle(title);
         post.setContent(content);
-        post.setName(name);
+        post.setCount(1);                // 처음 게시글을 썼기 때문에 조회수 1로 지정
         PostDAO.insertPost(post);
         return "postMain";
     }

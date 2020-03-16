@@ -41,6 +41,7 @@ public class MemberController {
         }
 
         session.setAttribute("userid", userid);
+        model.addAttribute("userid", userid);
         return "redirect:/post/list";
     }
 

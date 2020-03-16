@@ -89,6 +89,26 @@ public class PostDAO {
         }
     }
 
+    public static Post findPostByLoginId(String loginId) throws Exception {
+        String sql = "select name, memberId " +
+                     "from member " +
+                     "where loginId = ?";
+
+        try (Connection connection = DB.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, loginId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    Post post = new Post();
+                    post.setName(resultSet.getString("name"));
+                    post.setMemberId(resultSet.getLong("memberId"));
+                    return post;
+                }
+            }
+        }
+        return null;
+    }
+
     public static Post findByPostId(int id) throws Exception {
         String sql = "select p.postId, p.title, p.content, p.count, m.name, p.createDateTime " +
                      "from member m join post p on m.memberId = p.memberId " +

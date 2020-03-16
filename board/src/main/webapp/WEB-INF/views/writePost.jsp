@@ -41,13 +41,13 @@
             <tr>
                 <td>작성자</td>
                 <td>
-                    <input type="text" name="name" value="" class="form-control" >
+                    ${post.getName()}
                 </td>
             </tr>
             <tr>
                 <td>작성자 번호</td>
                 <td>
-                    <input type="text" name="number" value="" class="form-control" >
+                    ${post.getMemberId()}
                 </td>
             </tr>
             <tr>
