@@ -47,7 +47,7 @@
             <tr>
                 <td>작성자 번호</td>
                 <td>
-                    ${post.getMemberId()}
+                    <input type="text" name="number" value="${post.getMemberId()}" class="form-control" >
                 </td>
             </tr>
             <tr>

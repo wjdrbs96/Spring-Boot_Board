@@ -57,7 +57,7 @@
 
 
     <h1>댓글 등록</h1>
-    <form action="http://localhost:8081/comment/view?postId=${posts.getPostId()}" method="get">
+    <form action="http://localhost:8081/comment/view" method="get">
         <table class="table table-bordered table-condensed">
             <tr>
                 <td class="mid" width="100">댓글</td>

@@ -13,7 +13,8 @@ import java.util.List;
 public class CommentDAO {
 
     public static void commentInsert(String comment, int postID) throws Exception {
-        Post post = PostDAO.findByPostId(postID);
+        Post post = PostDAO.findOnePost(postID);
+        System.out.println(post.getMemberId());
 
         String sql = "insert into comment(postId, memberId, content) " +
                      "values(?,?,?)";

@@ -48,18 +48,18 @@ public class PostController {
         HttpSession session = request.getSession();
         String userId = (String) session.getAttribute("userid");
         Post post = PostDAO.findPostByLoginId(userId);
-        System.out.println(post.getMemberId());
-        System.out.println(post.getName());
         model.addAttribute("post", post);
         return "writePost";
     }
 
     @RequestMapping(value = "post/write", method = RequestMethod.POST)
     public String PostWrite(@RequestParam("title") String title,
-                            @RequestParam("content") String content) throws Exception {
+                            @RequestParam("content") String content,
+                            @RequestParam("number") int memberId) throws Exception {
         Post post = new Post();
         post.setTitle(title);
         post.setContent(content);
+        post.setMemberId(memberId);
         post.setCount(1);                // 처음 게시글을 썼기 때문에 조회수 1로 지정
         PostDAO.insertPost(post);
         return "redirect:/post/list";
@@ -87,15 +87,13 @@ public class PostController {
 
     @RequestMapping(value = "post/delete", method = RequestMethod.GET)
     public String postDelete(@RequestParam("postId") int postId) throws Exception {
-        Post post = PostDAO.findByPostId(postId);
-        PostDAO.deletePost(post.getPostId());
-        return "redirect:/post/comment/delete";
+        PostDAO.deletePost(postId);
+        return "redirect:/post/comment/delete?postId=" + postId;
     }
 
     @RequestMapping(value = "post/comment/delete", method = RequestMethod.GET)
     public String postCommentDelete(@RequestParam("postId") int postId) throws Exception {
         CommentDAO.postCommentDelete(postId);
-
         return "redirect:/post/list";
     }
 
