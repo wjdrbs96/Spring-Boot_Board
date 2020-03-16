@@ -62,7 +62,7 @@ public class PostController {
         post.setContent(content);
         post.setCount(1);                // 처음 게시글을 썼기 때문에 조회수 1로 지정
         PostDAO.insertPost(post);
-        return "postMain";
+        return "redirect:/post/list";
     }
 
     // 게시글 id 찾기
