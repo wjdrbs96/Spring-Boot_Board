@@ -25,6 +25,7 @@
             <tr>
                 <th>${comment.getCommentId()}</th>
                 <th>${comment.getContent()}</th>
+                <th><a href="http://localhost:8081/comment/delete?commentId=${comment.getCommentId()}">삭제</a></th>
             </tr>
         </c:forEach>
     </table>

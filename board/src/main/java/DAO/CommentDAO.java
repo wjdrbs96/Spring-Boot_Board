@@ -14,36 +14,34 @@ public class CommentDAO {
 
     public static void commentInsert(String comment, int postID) throws Exception {
         Post post = PostDAO.findOnePost(postID);
-        System.out.println(post.getMemberId());
 
         String sql = "insert into comment(postId, memberId, content) " +
-                     "values(?,?,?)";
+                     "values(?, ?, ?)";
 
         try (Connection connection = DB.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setLong(1, post.getPostId());
             statement.setLong(2, post.getMemberId());
             statement.setString(3, comment);
-
             statement.executeUpdate();
         }
-
-
     }
 
-    public static List<Comment> findAllComment(int postId) throws Exception {
-        String sql = "select c.commentid, c.content " +
-                     "from comment c " +
-                     "where c.postId = ?";
+    public static List<Comment> findAllComment(long postId) throws Exception {
+        String sql = "select * " +
+                     "from comment " +
+                     "where postId = ?";
 
         try (Connection connection = DB.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setInt(1, postId);
+            statement.setLong(1, postId);
             List<Comment> list = new LinkedList<>();
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     Comment comment = new Comment();
                     comment.setCommentId(resultSet.getInt("commentid"));
+                    comment.setPostId(resultSet.getLong("postId"));
+                    comment.setMemberId(resultSet.getLong("memberId"));
                     comment.setContent(resultSet.getString("content"));
                     list.add(comment);
                 }
@@ -52,15 +50,37 @@ public class CommentDAO {
         }
     }
 
-    public static void postCommentDelete(int postId) throws Exception{
+    public static void postCommentDelete(int commentId) throws Exception{
         String sql = "delete from comment " +
-                     "where postId = ?";
+                     "where commentid = ?";
 
         try (Connection connection = DB.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setInt(1, postId);
+            statement.setInt(1, commentId);
             statement.executeUpdate();
         }
+    }
+
+    public static Comment findOneComment(int commentId) throws Exception {
+        String sql = "select * " +
+                     "from comment " +
+                     "where commentId = ?";
+
+        try (Connection connection = DB.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, commentId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    Comment comment = new Comment();
+                    comment.setCommentId(resultSet.getLong("commentId"));
+                    comment.setPostId(resultSet.getLong("postId"));
+                    comment.setMemberId(resultSet.getLong("memberId"));
+                    comment.setContent(resultSet.getString("content"));
+                    return comment;
+                }
+            }
+        }
+        return null;
     }
 
 }

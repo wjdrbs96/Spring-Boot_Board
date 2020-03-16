@@ -36,8 +36,6 @@
     </form>
 
     <table class="table table-hover table table-striped">
-
-
         <tr>
             <th>번호</th>
             <th>작성자</th>
@@ -46,15 +44,14 @@
             <th>날짜</th>
         </tr>
 
-            <c:forEach items="${posts}" var="post">
-                <tr>
-                    <th>${post.getPostId()}</th>
-                    <th>${post.getMemberId()}</th>
-                    <th>
-                        <a href="http://localhost:8081/post/View?postId=${post.getPostId()}">${post.getTitle()}</a>
-                    </th>
-                    <th>${post.getCount()}</th>
-                <th>${post.getCreateDateTime()}</th>
+        <c:forEach items="${posts}" var="post">
+            <tr>
+                <th>${post.getPostId()}</th>
+                <th>${post.getMemberId()}</th>
+                <th>
+                    <a href="http://localhost:8081/post/View?postId=${post.getPostId()}">${post.getTitle()}</a>
+                </th>
+                <th>${post.getCount()}</th><th>${post.getCreateDateTime()}</th>
             </tr>
         </c:forEach>
 

@@ -31,4 +31,13 @@ public class CommentController {
         model.addAttribute("list", list);
         return "commentView";
     }
+
+    @RequestMapping(value = "comment/delete", method = RequestMethod.GET)
+    public String deleteComment(@RequestParam("commentId") int commentId) throws Exception {
+        Comment comment = CommentDAO.findOneComment(commentId);
+        CommentDAO.postCommentDelete(commentId);
+        List<Comment> list = CommentDAO.findAllComment(comment.getPostId());
+        System.out.println(comment.getPostId());
+        return "redirect:/comment/list?postId=" + comment.getPostId();
+    }
 }

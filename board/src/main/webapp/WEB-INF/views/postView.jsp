@@ -67,9 +67,7 @@
                 <td><input type="text" name="postId" value="${posts.getPostId()}"></td>
             </tr>
         </table>
-
         <button type="submit" class="btn btn-primary">등록</button>
-
     </form>
 
 </div>
