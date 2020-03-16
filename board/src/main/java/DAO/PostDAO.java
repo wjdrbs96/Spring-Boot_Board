@@ -159,14 +159,15 @@ public class PostDAO {
     // 게시글 수정
     public static void postUpdate(Post post) throws Exception {
         String sql = "update post " +
-                     "set title = ?, content = ? " +
+                     "set title = ?, content = ?, count = ? " +
                      "where postId = ?";
 
         try (Connection connection = DB.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, post.getTitle());
             statement.setString(2, post.getContent());
-            statement.setLong(3, post.getPostId());
+            statement.setLong(3, post.getCount());
+            statement.setLong(4, post.getPostId());
             statement.executeUpdate();
         }
     }

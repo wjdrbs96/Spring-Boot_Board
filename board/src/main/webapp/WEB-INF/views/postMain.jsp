@@ -51,7 +51,8 @@
                 <th>
                     <a href="http://localhost:8081/post/View?postId=${post.getPostId()}">${post.getTitle()}</a>
                 </th>
-                <th>${post.getCount()}</th><th>${post.getCreateDateTime()}</th>
+                <th>${post.getCount()}</th>
+                <th>${post.getCreateDateTime()}</th>
             </tr>
         </c:forEach>
 

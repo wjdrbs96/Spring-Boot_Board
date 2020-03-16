@@ -20,6 +20,7 @@ public class CommentController {
 
         CommentDAO.commentInsert(comment, postId);
         List<Comment> list = CommentDAO.findAllComment(postId);
+        model.addAttribute("post", postId);
         model.addAttribute("list", list);
         return "commentView";
     }

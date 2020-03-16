@@ -80,6 +80,8 @@ public class PostController {
         Post post = PostDAO.findByPostId(postId);
         post.setTitle(title);
         post.setContent(content);
+        System.out.println(post.getCount());
+        post.setCount(post.getCount() + 1);
 
         PostDAO.postUpdate(post);
         return "redirect:/post/list";
