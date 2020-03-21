@@ -22,17 +22,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Insert title here</title>
 </head>
+<style>
+    #margin{
+        margin-top : 30px;
+        margin-bottom : 40px
+    }
+</style>
 <body>
 
 
 <div class="container">
 
     <form method="post" class="form-inline">
-        <div class="form-group">
+        <div id="margin" class="form-group">
             <label><a href="http://localhost:8081/post/list">검색</a></label>
             <input type="text" size=20 class="form-control" name="srchText"  placeholder="제목을 입력하세요" >
+            <button type="submit" class="btn btn-primary">조회</button>
         </div>
-        <button type="submit" class="btn btn-primary">조회</button>
     </form>
 
     <table class="table table-hover table table-striped">
@@ -55,7 +61,6 @@
                 <th>${post.getCreateDateTime()}</th>
             </tr>
         </c:forEach>
-
     </table>
 
     <a href="http://localhost:8081/post/write" class="btn btn-default pull-right">글쓰기</a>

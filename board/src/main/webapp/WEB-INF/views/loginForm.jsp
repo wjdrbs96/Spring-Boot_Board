@@ -37,25 +37,18 @@
   <button type="submit" class="btn btn-primary">
     <i class="glyphicon glyphicon-ok"></i> 로그인
   </button>
-  <a href="register1.jsp" class="btn btn-default">
+  <a href="http://localhost:8081/register" class="btn btn-default">
     <i class="glyphicon glyphicon-user"></i> 회원가입
   </a>
 </form>
 
 <hr />
-<%--
-<div class="alert alert-info">
-  현재시각: <%= 현재시각 %>
-</div>
---%>
 
-<%--<% if (에러메세지 != null) { %>--%>
   <c:if test="${errorMsg} != null">
     <div class="alert alert-danger">
       로그인 실패: ${errorMsg}
     </div>
   </c:if>
-<%--<% } %>--%>
 
 </div>
 </body>

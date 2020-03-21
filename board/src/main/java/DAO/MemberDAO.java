@@ -1,6 +1,7 @@
 package DAO;
 
 import com.example.board.config.DB;
+import com.example.board.model.Member;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -35,6 +36,21 @@ public class MemberDAO {
 
     }
 
+    public static void memberRegister(Member member) throws Exception {
+        String sql = "insert member(loginId, password, name, nickname, email) " +
+                     "values(?, ?, ?, ?, ?)";
+
+        try (Connection connection = DB.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, member.getLoginId());
+            statement.setString(2, member.getPassword());
+            statement.setString(3, member.getName());
+
+            statement.setString(4, member.getNickName());
+            statement.setString(5, member.getEmail());
+            statement.executeUpdate();
+        }
+    }
 
 
 

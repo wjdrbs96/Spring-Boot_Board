@@ -15,8 +15,8 @@ public class CommentController {
 
     @RequestMapping(value = "comment/view", method = RequestMethod.GET)
     public String insertAllCommentView(Model model,
-                                 @RequestParam("postId") int postId,
-                                 @RequestParam("comment") String comment) throws Exception {
+                                       @RequestParam("postId") int postId,
+                                       @RequestParam("comment") String comment) throws Exception {
 
         CommentDAO.commentInsert(comment, postId);
         List<Comment> list = CommentDAO.findAllComment(postId);
@@ -38,7 +38,6 @@ public class CommentController {
         Comment comment = CommentDAO.findOneComment(commentId);
         CommentDAO.postCommentDelete(commentId);
         List<Comment> list = CommentDAO.findAllComment(comment.getPostId());
-        System.out.println(comment.getPostId());
         return "redirect:/comment/list?postId=" + comment.getPostId();
     }
 }

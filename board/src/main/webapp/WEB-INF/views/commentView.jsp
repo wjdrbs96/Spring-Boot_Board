@@ -30,7 +30,7 @@
         </c:forEach>
     </table>
     <a href="javascript:window.history.back()" class="btn btn-info">뒤로가기</a>
-    <%--<a href="http://localhost:8081/post/View?postId=${post}" class="btn btn-info">게시글로 가기</a>--%>
+    <%--<a href="http://localhost:8081/post/View?postId=${list.get(0).getPostId()}" class="btn btn-info">게시글로 가기</a>--%>
 </div>
 </body>
 </html>

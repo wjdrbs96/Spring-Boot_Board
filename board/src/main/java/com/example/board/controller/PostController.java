@@ -1,14 +1,15 @@
 package com.example.board.controller;
 
 import DAO.CommentDAO;
+import DAO.MemberDAO;
 import DAO.PostDAO;
+import com.example.board.model.Member;
 import com.example.board.model.Post;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -80,11 +81,61 @@ public class PostController {
         Post post = PostDAO.findByPostId(postId);
         post.setTitle(title);
         post.setContent(content);
-        System.out.println(post.getCount());
         post.setCount(post.getCount() + 1);
 
         PostDAO.postUpdate(post);
         return "redirect:/post/list";
+    }
+
+    @RequestMapping(value = "register", method = RequestMethod.GET)
+    public String register() {
+        return "register1";
+    }
+
+    @RequestMapping(value = "register", method = RequestMethod.POST)
+    public String register(Model model,
+                           @RequestParam("loginId") String loginId,
+                           @RequestParam("password1") String password1,
+                           @RequestParam("password2") String password2,
+                           @RequestParam("name") String name,
+                           @RequestParam("nickname") String nickname,
+                           @RequestParam("email") String email) throws Exception {
+        String error = "";
+        model.addAttribute("loginId", loginId);
+        model.addAttribute("password1", password1);
+        model.addAttribute("password2", password2);
+        model.addAttribute("name", name);
+        model.addAttribute("nickname", nickname);
+        model.addAttribute("email", email);
+
+        if (loginId == null || loginId.length() == 0) {
+            error = "사용자 아이디를 입력하세요";
+        }
+        else if (password1 == null || password1.length() == 0) {
+            error = "비밀번호1를 입력하세요";
+        }
+        else if (password2 == null || password2.length() == 0) {
+            error = "비밀번호2를 입력하세요";
+        }
+        else if (name == null || name.length() == 0) {
+            error = "이름을 입력하세요";
+        }
+        else if (nickname == null || nickname.length() == 0) {
+            error = "닉네임을 입력하세요";
+        }
+        else if (!password1.equals(password2)) {
+            error = "비밀번호 불일치";
+        }
+        else if (email == null || email.length() == 0) {
+            error = "이메일 주소를 입력하세요";
+        }
+        else {
+            Member member = new Member(loginId, password1, name, nickname, email);
+            MemberDAO.memberRegister(member);
+            return "redirect:/login";
+        }
+        model.addAttribute("error", error);
+        return "register1";
     }
 
     @RequestMapping(value = "post/delete", method = RequestMethod.GET)
