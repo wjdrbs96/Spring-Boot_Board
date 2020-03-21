@@ -37,9 +37,18 @@ public class PostController {
 
     // 게시글 검색
     @RequestMapping(value = "post/list", method = RequestMethod.POST)
-    public String findByTitle(Model model, @RequestParam("srchText") String srchText) throws Exception {
-        List<Post> posts = PostDAO.postFindByTitle(srchText, 1, 4);
-        model.addAttribute("posts", posts);
+    public String findByTitle(Model model,
+                              @RequestParam("select") String select,
+                              @RequestParam("srchText") String srchText) throws Exception {
+        model.addAttribute("select", select);
+        if (select.equals("title")) {
+            List<Post> posts = PostDAO.postFindByTitle(srchText, 1, 4);
+            model.addAttribute("posts", posts);
+        }
+        else if (select.equals("memberId")) {
+            List<Post> posts = PostDAO.postFindByMemberId(srchText, 1, 4);
+            model.addAttribute("posts", posts);
+        }
         return "postMain";
     }
 

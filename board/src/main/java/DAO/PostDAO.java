@@ -56,20 +56,51 @@ public class PostDAO {
         return 0;
     }
 
-    public static List<Post> postFindByTitle(String name, int currentPage, int pageSize) throws Exception {
+    public static List<Post> postFindByTitle(String title, int currentPage, int pageSize) throws Exception {
         String sql = "select * " +
                      "from post " +
                      "where title like ? or title like ? or title like ? " +
                      "limit ?, ?";
 
-        if (name == "") name = null;         // 코드 실행하다 보면 name=""으로 넘어오는 경우가 있어서 만듬
+        if (title == "") title = null;         // 코드 실행하다 보면 name=""으로 넘어오는 경우가 있어서 만듬
         try (Connection connection = DB.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setString(1, name + "%");
-            statement.setString(2, "%" + name);
-            statement.setString(3, "%" + name + "%");
+            statement.setString(1, title + "%");
+            statement.setString(2, "%" + title);
+            statement.setString(3, "%" + title + "%");
             statement.setInt(4, (currentPage - 1) * pageSize);
             statement.setInt(5, pageSize);
+            List<Post> list = new ArrayList<Post>();
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    Post post = new Post();
+                    post.setPostId(resultSet.getLong("postId"));
+                    post.setMemberId(resultSet.getLong("memberId"));
+                    post.setTitle(resultSet.getString("title"));
+                    post.setContent(resultSet.getString("content"));
+                    post.setCount(resultSet.getInt("count"));
+                    post.setCreateDateTime(resultSet.getDate("createDateTime"));
+
+                    list.add(post);
+                }
+                return list;
+            }
+        }
+    }
+
+    public static List<Post> postFindByMemberId(String memberId, int currentPage, int pageSize) throws Exception {
+        String sql = "select * " +
+                     "from post " +
+                     "where memberId = ? " +
+                     "limit ?, ?";
+
+        if (memberId == "") memberId = null;         // 코드 실행하다 보면 name=""으로 넘어오는 경우가 있어서 만듬
+        try (Connection connection = DB.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, memberId);
+            statement.setInt(2, (currentPage - 1) * pageSize);
+            statement.setInt(3, pageSize);
             List<Post> list = new ArrayList<Post>();
 
             try (ResultSet resultSet = statement.executeQuery()) {
@@ -111,8 +142,8 @@ public class PostDAO {
 
     public static Post findOnePost(int postId) throws Exception{
         String sql = "select * " +
-                     "from post " +
-                     "where postId = ?";
+                "from post " +
+                "where postId = ?";
 
         try (Connection connection = DB.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {

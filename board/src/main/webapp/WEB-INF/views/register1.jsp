@@ -55,13 +55,11 @@
     </form>
 
     <hr />
-
     <c:if test="${error != null}">
         <div class="alert alert-danger">
             회원가입 실패: ${error}
         </div>
     </c:if>
-
 
 </div>
 </body>
