@@ -51,6 +51,7 @@
         <button type="submit" class="btn btn-primary">
             <i class="glyphicon glyphicon-ok"></i> 회원가입
         </button>
+        <a href="http://localhost:8081/login" class="btn btn-default">처음으로</a>
     </form>
 
     <hr />
