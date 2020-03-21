@@ -20,7 +20,7 @@ public class CommentController {
 
         CommentDAO.commentInsert(comment, postId);
         List<Comment> list = CommentDAO.findAllComment(postId);
-        model.addAttribute("post", postId);
+        model.addAttribute("postId", postId);
         model.addAttribute("list", list);
         return "commentView";
     }
@@ -29,6 +29,7 @@ public class CommentController {
     public String getCommentList(Model model,
                                  @RequestParam("postId") int postId) throws Exception {
         List<Comment> list = CommentDAO.findAllComment(postId);
+        model.addAttribute("postId", postId);
         model.addAttribute("list", list);
         return "commentView";
     }
