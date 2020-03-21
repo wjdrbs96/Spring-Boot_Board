@@ -44,7 +44,7 @@
 
 <hr />
 
-  <c:if test ="${!errorMsg == null}">
+  <c:if test ="${errorMsg != null}">
     <div class="alert alert-danger">
       로그인 실패: ${errorMsg}
     </div>
