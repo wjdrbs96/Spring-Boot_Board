@@ -2,7 +2,6 @@ package DAO;
 
 import com.example.board.config.DB;
 import com.example.board.model.Post;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,7 +17,6 @@ public class PostDAO {
                      "on p.memberId = m.memberId " +
                      "order by p.postId desc " +
                      "limit ?, ?";
-
 
         // 코드 실행하다 보면 name=""으로 넘어오는 경우가 있어서 만듬
         try (Connection connection = DB.getConnection();
@@ -92,16 +90,17 @@ public class PostDAO {
         }
     }
 
-    public static List<Post> postFindByMemberId(String memberId, int currentPage, int pageSize) throws Exception {
-        String sql = "select * " +
-                     "from post " +
-                     "where memberId = ? " +
+    public static List<Post> postFindByNickName(String nickName, int currentPage, int pageSize) throws Exception {
+        String sql = "select p.*, m.nickname " +
+                     "from post p join member m " +
+                     "on p.memberId = m.memberId " +
+                     "where m.nickname like ? " +
                      "limit ?, ?";
 
-        if (memberId == "") memberId = null;         // 코드 실행하다 보면 name=""으로 넘어오는 경우가 있어서 만듬
+        if (nickName == "") nickName = null;         // 코드 실행하다 보면 name=""으로 넘어오는 경우가 있어서 만듬
         try (Connection connection = DB.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setString(1, memberId);
+            statement.setString(1, "%" + nickName + "%");
             statement.setInt(2, (currentPage - 1) * pageSize);
             statement.setInt(3, pageSize);
             List<Post> list = new ArrayList<Post>();
@@ -110,7 +109,7 @@ public class PostDAO {
                 while (resultSet.next()) {
                     Post post = new Post();
                     post.setPostId(resultSet.getLong("postId"));
-                    post.setMemberId(resultSet.getLong("memberId"));
+                    post.setNickName(resultSet.getString("nickname"));
                     post.setTitle(resultSet.getString("title"));
                     post.setContent(resultSet.getString("content"));
                     post.setCount(resultSet.getInt("count"));
@@ -148,7 +147,7 @@ public class PostDAO {
     }
 
     public static Post findByPostId(int id) throws Exception {
-        String sql = "select p.postId, p.title, p.content, p.count, m.name, p.createDateTime " +
+        String sql = "select p.*, m.name " +
                      "from member m join post p on m.memberId = p.memberId " +
                      "where p.postId = ?";
 
@@ -160,6 +159,7 @@ public class PostDAO {
                     Post post = new Post();
                     post.setPostId(resultSet.getLong("postId"));
                     post.setTitle(resultSet.getString("title"));
+                    post.setMemberId(resultSet.getLong("memberId"));
                     post.setContent(resultSet.getString("content"));
                     post.setCount(resultSet.getInt("count"));
                     post.setName(resultSet.getString("name"));

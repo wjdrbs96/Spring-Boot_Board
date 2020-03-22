@@ -47,10 +47,11 @@ public class PostController {
             List<Post> posts = PostDAO.postFindByTitle(srchText, 1, 4);
             model.addAttribute("posts", posts);
         }
-        else if (select.equals("memberId")) {
-            List<Post> posts = PostDAO.postFindByMemberId(srchText, 1, 4);
+        else if (select.equals("nickname")) {
+            List<Post> posts = PostDAO.postFindByNickName(srchText, 1, 4);
             model.addAttribute("posts", posts);
         }
+
         return "postMain";
     }
 
@@ -70,11 +71,13 @@ public class PostController {
     @RequestMapping(value = "post/write", method = RequestMethod.POST)
     public String PostWrite(@RequestParam("title") String title,
                             @RequestParam("content") String content,
-                            @RequestParam("nickname") String nickName) throws Exception {
+                            @RequestParam("nickname") String nickName,
+                            @RequestParam("memberId") int memberId) throws Exception {
         Post post = new Post();
         post.setTitle(title);
         post.setContent(content);
         post.setNickName(nickName);
+        post.setMemberId(memberId);
         post.setCount(1);                // 처음 게시글을 썼기 때문에 조회수 1로 지정
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

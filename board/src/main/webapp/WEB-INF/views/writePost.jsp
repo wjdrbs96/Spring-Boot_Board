@@ -51,6 +51,12 @@
                 </td>
             </tr>
             <tr>
+                <td>사용자번호</td>
+                <td>
+                    <input type="text" name="memberId" value="${member.getMemberId()}" class="form-control">
+                </td>
+            </tr>
+            <tr>
                 <td>작성시간</td>
                 <td>
                     <input type="text" name="time" value="${time}" class="form-control" >

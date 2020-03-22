@@ -38,7 +38,7 @@
             <h3><a href="http://localhost:8081/post/list">검색창</a></h3>
             <select name="select" class="form-control">
                 <option value="title" >제목</option>
-                <option value="memberId">작성자</option>
+                <option value="nickname">작성자</option>
             </select>
             <input type="text" size=20 class="form-control" name="srchText"  placeholder="검색" >
             <button type="submit" class="btn btn-primary">조회</button>
