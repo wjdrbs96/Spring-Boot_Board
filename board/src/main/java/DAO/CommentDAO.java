@@ -50,14 +50,14 @@ public class CommentDAO {
         }
     }
 
-    public static void postCommentDelete(int commentId) throws Exception{
+    public static void postCommentDelete(int postId) throws Exception{
         String sql = "delete from comment " +
-                     "where commentid = ?";
+                     "where postId = ?";
 
         try (Connection connection = DB.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setInt(1, commentId);
-            statement.executeUpdate();
+             statement.setInt(1, postId);
+             statement.executeUpdate();
         }
     }
 
@@ -68,9 +68,9 @@ public class CommentDAO {
 
         try (Connection connection = DB.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setInt(1, commentId);
-            try (ResultSet resultSet = statement.executeQuery()) {
-                while (resultSet.next()) {
+             statement.setInt(1, commentId);
+             try (ResultSet resultSet = statement.executeQuery()) {
+                 while (resultSet.next()) {
                     Comment comment = new Comment();
                     comment.setCommentId(resultSet.getLong("commentId"));
                     comment.setPostId(resultSet.getLong("postId"));
