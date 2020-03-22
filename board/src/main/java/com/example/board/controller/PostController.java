@@ -101,10 +101,14 @@ public class PostController {
 
     // 게시글 id 찾기
     @RequestMapping(value = "post/View", method = RequestMethod.GET)
-    public String PostView(Model model, @RequestParam("postId") int postId) throws Exception {
+    public String PostView(Model model,
+                           @RequestParam("postId") int postId) throws Exception {
         Post post = PostDAO.findByPostId(postId);
-        model.addAttribute("posts", post);
 
+        PostDAO.postUpdate(post);
+        post.setCount(post.getCount() + 1);
+        PostDAO.postUpdate(post);
+        model.addAttribute("posts", post);
         return "postView";
     }
 
@@ -115,7 +119,7 @@ public class PostController {
         Post post = PostDAO.findByPostId(postId);
         post.setTitle(title);
         post.setContent(content);
-        post.setCount(post.getCount() + 1);
+        post.setCount(post.getCount());
 
         PostDAO.postUpdate(post);
         return "redirect:/post/list";
