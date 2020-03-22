@@ -14,6 +14,7 @@ public class PostDAO {
 
     public static List<Post> findAll(int page, int pageSize) throws Exception {
         String sql = "select * from post " +
+                     "order by postId desc " +
                      "limit ?, ?";
 
 
@@ -123,8 +124,8 @@ public class PostDAO {
 
     public static Post findOnePost(int postId) throws Exception{
         String sql = "select * " +
-                "from post " +
-                "where postId = ?";
+                     "from post " +
+                     "where postId = ?";
 
         try (Connection connection = DB.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {

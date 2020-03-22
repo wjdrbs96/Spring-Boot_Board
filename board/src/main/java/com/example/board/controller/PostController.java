@@ -62,7 +62,7 @@ public class PostController {
         Member member = MemberDAO.findPostByLoginId(userId);
         model.addAttribute("member", member);
         Date date = new Date();
-        SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         model.addAttribute("time", sd.format(date));
         return "writePost";
     }
@@ -167,6 +167,5 @@ public class PostController {
         CommentDAO.postCommentDelete(postId);
         return "redirect:/post/list";
     }
-
 
 }

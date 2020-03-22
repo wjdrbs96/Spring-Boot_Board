@@ -44,5 +44,4 @@ public class MemberController {
         return "redirect:/post/list";
     }
 
-
 }
