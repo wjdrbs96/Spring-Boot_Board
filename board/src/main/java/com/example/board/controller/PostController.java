@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -57,8 +59,11 @@ public class PostController {
     public String PostWrite(Model model, HttpServletRequest request) throws Exception {
         HttpSession session = request.getSession();
         String userId = (String) session.getAttribute("userid");
-        Post post = PostDAO.findPostByLoginId(userId);
-        model.addAttribute("post", post);
+        Member member = MemberDAO.findPostByLoginId(userId);
+        model.addAttribute("member", member);
+        Date date = new Date();
+        SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
+        model.addAttribute("time", sd.format(date));
         return "writePost";
     }
 
@@ -71,6 +76,9 @@ public class PostController {
         post.setContent(content);
         post.setMemberId(memberId);
         post.setCount(1);                // 처음 게시글을 썼기 때문에 조회수 1로 지정
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        post.setCreateDateTime(sdf.format(new Date()));
         PostDAO.insertPost(post);
         return "redirect:/post/list";
     }
@@ -80,6 +88,7 @@ public class PostController {
     public String PostView(Model model, @RequestParam("postId") int postId) throws Exception {
         Post post = PostDAO.findByPostId(postId);
         model.addAttribute("posts", post);
+
         return "postView";
     }
 

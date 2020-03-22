@@ -2,6 +2,7 @@ package DAO;
 
 import com.example.board.config.DB;
 import com.example.board.model.Member;
+import com.example.board.model.Post;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -34,6 +35,26 @@ public class MemberDAO {
             }
         }
 
+    }
+
+    public static Member findPostByLoginId(String loginId) throws Exception {
+        String sql = "select name, memberId " +
+                "from member " +
+                "where loginId = ?";
+
+        try (Connection connection = DB.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, loginId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    Member member = new Member();
+                    member.setName(resultSet.getString("name"));
+                    member.setMemberId(resultSet.getLong("memberId"));
+                    return member;
+                }
+            }
+        }
+        return null;
     }
 
     public static void memberRegister(Member member) throws Exception {

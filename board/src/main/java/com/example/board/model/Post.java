@@ -9,7 +9,7 @@ public class Post {
     String title;
     String content;
     int count;
-    Date createDateTime;
+    String createDateTime;
     String name;
 
     public long getPostId() {
@@ -52,11 +52,11 @@ public class Post {
         this.count = count;
     }
 
-    public Date getCreateDateTime() {
+    public String getCreateDateTime() {
         return createDateTime;
     }
 
-    public void setCreateDateTime(Date createDateTime) {
+    public void setCreateDateTime(String createDateTime) {
         this.createDateTime = createDateTime;
     }
 

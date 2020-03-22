@@ -41,19 +41,19 @@
             <tr>
                 <td>작성자</td>
                 <td>
-                    ${post.getName()}
+                    ${member.getName()}
                 </td>
             </tr>
             <tr>
                 <td>작성자 번호</td>
                 <td>
-                    <input type="text" name="number" value="${post.getMemberId()}" class="form-control" >
+                    <input type="text" name="number" value="${member.getMemberId()}" class="form-control">
                 </td>
             </tr>
             <tr>
                 <td>작성시간</td>
                 <td>
-                    <input type="text" name="time" value="" class="form-control" >
+                    <input type="text" name="time" value="${time}" class="form-control" >
                 </td>
             </tr>
         </table>

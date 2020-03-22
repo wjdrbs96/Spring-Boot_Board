@@ -16,6 +16,10 @@ public class Member {
         this.email = email;
     }
 
+    public Member() {
+
+    }
+
     public long getMemberId() {
         return memberId;
     }

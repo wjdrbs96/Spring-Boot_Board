@@ -32,7 +32,7 @@ public class PostDAO {
                     post.setTitle(resultSet.getString("title"));
                     post.setContent(resultSet.getString("content"));
                     post.setCount(resultSet.getInt("count"));
-                    post.setCreateDateTime(resultSet.getDate("createDateTime"));
+                    post.setCreateDateTime(resultSet.getString("createDateTime"));
 
                     list.add(post);
                 }
@@ -80,7 +80,7 @@ public class PostDAO {
                     post.setTitle(resultSet.getString("title"));
                     post.setContent(resultSet.getString("content"));
                     post.setCount(resultSet.getInt("count"));
-                    post.setCreateDateTime(resultSet.getDate("createDateTime"));
+                    post.setCreateDateTime(resultSet.getString("createDateTime"));
 
                     list.add(post);
                 }
@@ -111,7 +111,7 @@ public class PostDAO {
                     post.setTitle(resultSet.getString("title"));
                     post.setContent(resultSet.getString("content"));
                     post.setCount(resultSet.getInt("count"));
-                    post.setCreateDateTime(resultSet.getDate("createDateTime"));
+                    post.setCreateDateTime(resultSet.getString("createDateTime"));
 
                     list.add(post);
                 }
@@ -120,25 +120,6 @@ public class PostDAO {
         }
     }
 
-    public static Post findPostByLoginId(String loginId) throws Exception {
-        String sql = "select name, memberId " +
-                     "from member " +
-                     "where loginId = ?";
-
-        try (Connection connection = DB.getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setString(1, loginId);
-            try (ResultSet resultSet = statement.executeQuery()) {
-                while (resultSet.next()) {
-                    Post post = new Post();
-                    post.setName(resultSet.getString("name"));
-                    post.setMemberId(resultSet.getLong("memberId"));
-                    return post;
-                }
-            }
-        }
-        return null;
-    }
 
     public static Post findOnePost(int postId) throws Exception{
         String sql = "select * " +
@@ -179,7 +160,7 @@ public class PostDAO {
                     post.setContent(resultSet.getString("content"));
                     post.setCount(resultSet.getInt("count"));
                     post.setName(resultSet.getString("name"));
-                    post.setCreateDateTime(resultSet.getDate("createDateTime"));
+                    post.setCreateDateTime(resultSet.getString("createDateTime"));
                     return post;
                 }
             }
@@ -205,8 +186,8 @@ public class PostDAO {
 
     // 글쓰기
     public static void insertPost(Post post) throws Exception {
-        String sql = "insert post(memberId, title, content, count) " +
-                     "values(?, ?, ?, ?)";
+        String sql = "insert post(memberId, title, content, count, createDateTime) " +
+                     "values(?, ?, ?, ?, ?)";
 
         try (Connection connection = DB.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -214,6 +195,7 @@ public class PostDAO {
             statement.setString(2, post.getTitle());
             statement.setString(3, post.getContent());
             statement.setInt(4, 1);
+            statement.setString(5, post.getCreateDateTime());
             statement.executeUpdate();
         }
     }
