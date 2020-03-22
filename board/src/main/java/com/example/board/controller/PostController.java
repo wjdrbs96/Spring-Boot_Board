@@ -43,13 +43,16 @@ public class PostController {
                               @RequestParam("select") String select,
                               @RequestParam("srchText") String srchText) throws Exception {
         model.addAttribute("select", select);
+
         if (select.equals("title")) {
             List<Post> posts = PostDAO.postFindByTitle(srchText, 1, 4);
             model.addAttribute("posts", posts);
+            return "postMainTitle";
         }
         else if (select.equals("nickname")) {
             List<Post> posts = PostDAO.postFindByNickName(srchText, 1, 4);
             model.addAttribute("posts", posts);
+            return "postMainNickName";
         }
 
         return "postMain";
@@ -105,7 +108,6 @@ public class PostController {
                            @RequestParam("postId") int postId) throws Exception {
         Post post = PostDAO.findByPostId(postId);
 
-        PostDAO.postUpdate(post);
         post.setCount(post.getCount() + 1);
         PostDAO.postUpdate(post);
         model.addAttribute("posts", post);

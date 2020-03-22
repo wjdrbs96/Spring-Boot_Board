@@ -58,8 +58,9 @@ public class PostDAO {
     }
 
     public static List<Post> postFindByTitle(String title, int currentPage, int pageSize) throws Exception {
-        String sql = "select * " +
-                     "from post " +
+        String sql = "select p.*, m.nickname " +
+                     "from post p join member m " +
+                     "on p.memberId = m.memberId " +
                      "where title like ? or title like ? or title like ? " +
                      "limit ?, ?";
 
@@ -77,6 +78,7 @@ public class PostDAO {
                 while (resultSet.next()) {
                     Post post = new Post();
                     post.setPostId(resultSet.getLong("postId"));
+                    post.setNickName(resultSet.getString("nickname"));
                     post.setMemberId(resultSet.getLong("memberId"));
                     post.setTitle(resultSet.getString("title"));
                     post.setContent(resultSet.getString("content"));
