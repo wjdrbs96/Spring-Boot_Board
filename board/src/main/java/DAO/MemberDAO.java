@@ -38,9 +38,9 @@ public class MemberDAO {
     }
 
     public static Member findPostByLoginId(String loginId) throws Exception {
-        String sql = "select name, memberId " +
-                "from member " +
-                "where loginId = ?";
+        String sql = "select name, nickname, memberId " +
+                     "from member " +
+                     "where loginId = ?";
 
         try (Connection connection = DB.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -50,6 +50,7 @@ public class MemberDAO {
                     Member member = new Member();
                     member.setName(resultSet.getString("name"));
                     member.setMemberId(resultSet.getLong("memberId"));
+                    member.setNickName(resultSet.getString("nickname"));
                     return member;
                 }
             }

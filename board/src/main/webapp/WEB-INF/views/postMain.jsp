@@ -57,7 +57,7 @@
         <c:forEach items="${posts}" var="post">
             <tr>
                 <th>${post.getPostId()}</th>
-                <th>${post.getMemberId()}</th>
+                <th>${post.getNickName()}</th>
                 <th>
                     <a href="http://localhost:8081/post/View?postId=${post.getPostId()}">${post.getTitle()}</a>
                 </th>

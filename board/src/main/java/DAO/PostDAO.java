@@ -13,8 +13,10 @@ import java.util.List;
 public class PostDAO {
 
     public static List<Post> findAll(int page, int pageSize) throws Exception {
-        String sql = "select * from post " +
-                     "order by postId desc " +
+        String sql = "select p.*, m.nickname " +
+                     "from post p join member m " +
+                     "on p.memberId = m.memberId " +
+                     "order by p.postId desc " +
                      "limit ?, ?";
 
 
@@ -34,7 +36,7 @@ public class PostDAO {
                     post.setContent(resultSet.getString("content"));
                     post.setCount(resultSet.getInt("count"));
                     post.setCreateDateTime(resultSet.getString("createDateTime"));
-
+                    post.setNickName(resultSet.getString("nickname"));
                     list.add(post);
                 }
                 return list;

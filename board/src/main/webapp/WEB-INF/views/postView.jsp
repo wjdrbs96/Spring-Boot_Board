@@ -45,7 +45,7 @@
             </tr>
             <tr>
                 <td>작성시간</td>
-                <td></td>
+                <td>${posts.getCreateDateTime()}</td>
             </tr>
         </table>
 

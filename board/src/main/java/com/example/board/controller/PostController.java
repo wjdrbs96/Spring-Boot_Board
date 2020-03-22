@@ -70,11 +70,11 @@ public class PostController {
     @RequestMapping(value = "post/write", method = RequestMethod.POST)
     public String PostWrite(@RequestParam("title") String title,
                             @RequestParam("content") String content,
-                            @RequestParam("number") int memberId) throws Exception {
+                            @RequestParam("nickname") String nickName) throws Exception {
         Post post = new Post();
         post.setTitle(title);
         post.setContent(content);
-        post.setMemberId(memberId);
+        post.setNickName(nickName);
         post.setCount(1);                // 처음 게시글을 썼기 때문에 조회수 1로 지정
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

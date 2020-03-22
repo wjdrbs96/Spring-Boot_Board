@@ -1,8 +1,5 @@
 package com.example.board.model;
 
-import java.util.Date;
-import java.util.StringJoiner;
-
 public class Post {
     long postId;
     long memberId;
@@ -10,6 +7,7 @@ public class Post {
     String content;
     int count;
     String createDateTime;
+    String nickName;
     String name;
 
     public long getPostId() {
@@ -60,6 +58,14 @@ public class Post {
         this.createDateTime = createDateTime;
     }
 
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
     public String getName() {
         return name;
     }
@@ -67,6 +73,4 @@ public class Post {
     public void setName(String name) {
         this.name = name;
     }
-
-
 }

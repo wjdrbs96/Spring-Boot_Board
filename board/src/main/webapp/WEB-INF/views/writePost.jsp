@@ -45,9 +45,9 @@
                 </td>
             </tr>
             <tr>
-                <td>작성자 번호</td>
+                <td>닉네임</td>
                 <td>
-                    <input type="text" name="number" value="${member.getMemberId()}" class="form-control">
+                    <input type="text" name="nickname" value="${member.getNickName()}" class="form-control">
                 </td>
             </tr>
             <tr>
