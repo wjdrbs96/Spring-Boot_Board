@@ -86,6 +86,19 @@ public class PostController {
         return "redirect:/post/list";
     }
 
+    @RequestMapping(value = "post/update", method = RequestMethod.POST)
+    public String postUpdateRedirect(Model model,
+                                     @RequestParam("postId") int postId,
+                                     @RequestParam("title") String title,
+                                     @RequestParam("content") String content) throws Exception {
+        Post post = PostDAO.findByPostId(postId);
+        post.setTitle(title);
+        post.setContent(content);
+        post.setCount(post.getCount());
+        model.addAttribute("posts", post);
+        return "postUpdate";
+    }
+
     // 게시글 id 찾기
     @RequestMapping(value = "post/View", method = RequestMethod.GET)
     public String PostView(Model model, @RequestParam("postId") int postId) throws Exception {

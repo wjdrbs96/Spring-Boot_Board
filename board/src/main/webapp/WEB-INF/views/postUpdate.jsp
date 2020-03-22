@@ -20,7 +20,7 @@
 
     <h1>게시글 수정</h1>
 
-    <form action="http://localhost:8081/post/update?postId=${posts.getPostId()}" method="POST">
+    <form action="http://localhost:8081/update?postId=${posts.getPostId()}" method="POST">
         <table class="table table-bordered table-condensed">
             <tr>
                 <td>게시글 번호</td>
@@ -29,16 +29,15 @@
             <tr>
                 <td>글 제목</td>
                 <td>
-                    <textarea class="form-control" name="title" rows="1" readonly>${posts.getTitle()}</textarea>
+                    <textarea class="form-control" name="title" rows="1">${posts.getTitle()}</textarea>
                 </td>
             </tr>
             <tr>
                 <td>글 내용</td>
                 <td>
-                    <textarea class="form-control" name="content" rows="10" readonly>${posts.getContent()}</textarea>
+                    <textarea class="form-control" name="content" rows="10">${posts.getContent()}</textarea>
                 </td>
             </tr>
-
             <tr>
                 <td>작성자</td>
                 <td>${posts.getName()}</td>
@@ -49,27 +48,13 @@
             </tr>
         </table>
 
-        <button type="submit" class="btn btn-primary">수정</button>
+        <button type="submit" class="btn btn-primary">저장</button>
         <a href="http://localhost:8081/comment/list?postId=${posts.getPostId()}" class="btn btn-warning">댓글</a>
         <a href="http://localhost:8081/post/delete?postId=${posts.getPostId()}" class="btn btn-warning" onclick="confirm('삭제하시겠습니까?')">삭제</a>
         <a href="javascript:window.history.back()" class="btn btn-info">뒤로가기</a>
         <a href="http://localhost:8081/post/list" class="btn btn-info">처음으로</a>
     </form>
 
-
-    <h1>댓글 등록</h1>
-    <form action="http://localhost:8081/comment/view" method="get">
-        <table class="table table-bordered table-condensed">
-            <tr>
-                <td class="mid" width="100">댓글</td>
-                <td width="700">
-                    <textarea class="form-control" name="comment" rows="2"></textarea>
-                </td>
-                <td><input type="text" name="postId" value="${posts.getPostId()}" readonly></td>
-            </tr>
-        </table>
-        <button type="submit" class="btn btn-primary">등록</button>
-    </form>
 
 </div>
 </body>

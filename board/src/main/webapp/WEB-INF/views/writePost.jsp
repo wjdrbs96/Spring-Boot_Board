@@ -47,19 +47,19 @@
             <tr>
                 <td>닉네임</td>
                 <td>
-                    <input type="text" name="nickname" value="${member.getNickName()}" class="form-control">
+                    <input type="text" name="nickname" value="${member.getNickName()}" class="form-control" readonly>
                 </td>
             </tr>
             <tr>
                 <td>사용자번호</td>
                 <td>
-                    <input type="text" name="memberId" value="${member.getMemberId()}" class="form-control">
+                    <input type="text" name="memberId" value="${member.getMemberId()}" class="form-control" readonly>
                 </td>
             </tr>
             <tr>
                 <td>작성시간</td>
                 <td>
-                    <input type="text" name="time" value="${time}" class="form-control" >
+                    <input type="text" name="time" value="${time}" class="form-control" readonly >
                 </td>
             </tr>
         </table>
