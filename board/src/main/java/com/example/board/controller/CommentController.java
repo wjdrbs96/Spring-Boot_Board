@@ -35,9 +35,9 @@ public class CommentController {
 
     @RequestMapping(value = "comment/delete", method = RequestMethod.GET)
     public String deleteComment(@RequestParam("commentId") int commentId) throws Exception {
+        System.out.println(commentId);
         Comment comment = CommentDAO.findOneComment(commentId);
-        CommentDAO.postCommentDelete(commentId);
-        List<Comment> list = CommentDAO.findAllComment(comment.getPostId());
+        CommentDAO.postCommentDelete(comment.getPostId());
         return "redirect:/comment/list?postId=" + comment.getPostId();
     }
 }
