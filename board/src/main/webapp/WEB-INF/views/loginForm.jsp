@@ -11,6 +11,9 @@
   <style>
       body { font-family: 굴림체; }
       input.form-control { width: 200px; }
+      .color-control {
+        color: #58ccff;
+      }
   </style>
 </head>
 <body>
@@ -33,6 +36,9 @@
     <label>
       <input type="checkbox" name="autologin" /> 자동 로그인
     </label>
+    <a class="color-control" href="http://localhost:8081/find/password">
+      <button class="btn btn-link" type="button">비밀번호 찾기</button>
+    </a>
   </div>
   <button type="submit" class="btn btn-primary">
     <i class="glyphicon glyphicon-ok"></i> 로그인
@@ -40,6 +46,7 @@
   <a href="http://localhost:8081/register" class="btn btn-default">
     <i class="glyphicon glyphicon-user"></i> 회원가입
   </a>
+
 </form>
 
 <hr />

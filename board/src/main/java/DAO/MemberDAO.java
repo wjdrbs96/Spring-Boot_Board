@@ -7,6 +7,7 @@ import com.example.board.model.Post;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class MemberDAO {
     //TODO loginCheck
@@ -35,6 +36,25 @@ public class MemberDAO {
             }
         }
 
+    }
+
+    public static String passwordFind(String loginId, String name) throws Exception {
+        String sql = "select password " +
+                     "from member " +
+                     "where loginId = ? and name = ?";
+
+        try(Connection connection = DB.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, loginId);
+            statement.setString(2, name);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    return resultSet.getString("password");
+                }
+            }
+        }
+
+        return null;
     }
 
     public static Member findPostByLoginId(String loginId) throws Exception {

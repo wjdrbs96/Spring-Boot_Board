@@ -44,4 +44,27 @@ public class MemberController {
         return "redirect:/post/list";
     }
 
+    @RequestMapping(value = "find/password", method = RequestMethod.GET)
+    public String findPassword() {
+        return "findPassword";
+    }
+
+    @RequestMapping(value = "find/password", method = RequestMethod.POST)
+    public String findPassword(Model model,
+                               @RequestParam("loginId") String loginId,
+                               @RequestParam("name") String name) throws Exception {
+
+        String password = MemberDAO.passwordFind(loginId, name);
+
+        if (password == null) {
+            String errorMsg = "입력하신 정보가 맞지 않습니다";
+            model.addAttribute("errorMsg", errorMsg);
+            return "errorPage";
+        }
+
+        model.addAttribute("password", password);
+
+        return "findPasswordView";
+    }
+
 }
