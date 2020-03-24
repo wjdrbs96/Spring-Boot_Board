@@ -59,7 +59,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="">Home</a>
+                    <a class="nav-link" href="http://localhost:8081/post/list">Home</a>
                 </li>
 
                 <li class="nav-item">
