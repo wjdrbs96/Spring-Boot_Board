@@ -67,4 +67,11 @@ public class MemberController {
         return "findPasswordView";
     }
 
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "redirect:/login";
+    }
+
+
 }

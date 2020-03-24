@@ -190,5 +190,10 @@ public class PostController {
         return "redirect:/post/list";
     }
 
+    @RequestMapping("test")
+    public String test() {
+        return "nav";
+    }
+
 
 }
