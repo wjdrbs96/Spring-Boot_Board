@@ -39,8 +39,12 @@
 </head>
 <style>
     #margin{
-        margin-top : 30px;
-        margin-bottom : 40px
+        margin-bottom : 20px
+    }
+
+    .navbar.sticky-top.navbar-expand-lg.navbar-light {
+        margin : 0px;
+        background-color: white;
     }
 </style>
 <body>
@@ -48,9 +52,40 @@
 
 <div class="container">
 
+    <nav class="navbar sticky-top navbar-expand-lg navbar-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:8081/post/list">Home</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:8081/logout">Logout</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:8081/notice">공지사항</a>
+                </li>
+
+                <li class="nav-item dropdown active">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Menu
+                    </a>
+                </li>
+
+            </ul>
+
+
+        </div>
+    </nav>
+
     <form method="post" class="form-inline">
         <div id="margin" class="form-group">
-            <h3><a href="http://localhost:8081/post/list">검색창</a></h3>
             <select name="select" class="form-control">
                 <option value="title" >제목</option>
                 <option value="nickname" selected>작성자</option>
