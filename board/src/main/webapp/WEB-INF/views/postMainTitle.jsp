@@ -72,9 +72,9 @@
                 </li>
 
                 <li class="nav-item dropdown active">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                    <a class="nav-link dropdown-toggle" href="http://localhost:8081/member/update" id="navbarDropdown" role="button"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Menu
+                        회원정보수정
                     </a>
                 </li>
 

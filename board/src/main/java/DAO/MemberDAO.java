@@ -38,6 +38,30 @@ public class MemberDAO {
 
     }
 
+    public static Member findOneMember(String loginId) throws SQLException {
+        String sql = "select * " +
+                     "from member " +
+                     "where loginId = ?";
+
+        try(Connection connection = DB.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+             statement.setString(1, loginId);
+             try (ResultSet resultSet = statement.executeQuery()) {
+                 while (resultSet.next()) {
+                     Member member = new Member();
+                     member.setMemberId(resultSet.getLong("memberId"));
+                     member.setLoginId(resultSet.getString("loginId"));
+                     member.setPassword(resultSet.getString("password"));
+                     member.setNickName(resultSet.getString("nickname"));
+                     member.setName(resultSet.getString("name"));
+                     member.setEmail(resultSet.getString("email"));
+                     return member;
+                 }
+             }
+        }
+        return null;
+    }
+
     public static String passwordFind(String loginId, String name) throws Exception {
         String sql = "select password " +
                      "from member " +
@@ -55,6 +79,23 @@ public class MemberDAO {
         }
 
         return null;
+    }
+
+    public static void memberUpdate(Member member, int memberId) throws SQLException {
+        String sql = "update member " +
+                     "set loginId = ?, password = ?, name = ?, nickname = ?, email = ? " +
+                     "where memberId = ?";
+
+        try (Connection connection = DB.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, member.getLoginId());
+            statement.setString(2,member.getPassword());
+            statement.setString(3, member.getName());
+            statement.setString(4, member.getNickName());
+            statement.setString(5, member.getEmail());
+            statement.setLong(6, memberId);
+            statement.executeUpdate();
+        }
     }
 
     public static Member findPostByLoginId(String loginId) throws Exception {

@@ -33,7 +33,6 @@
             crossorigin="anonymous"></script>
 
     <link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/res/css/application.css" rel="stylesheet">
     <title>Insert title here</title>
 </head>
 <style>
@@ -69,15 +68,9 @@
                 </li>
 
                 <li class="nav-item dropdown active">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Menu
-                    </a>
+                    <a class="nav-link" href="http://localhost:8081/member/update?loginId=<%=session.getAttribute("userid")%>">회원정보수정</a>
                 </li>
-
             </ul>
-
-
         </div>
     </nav>
     <!-- ./ 메뉴바 -->
