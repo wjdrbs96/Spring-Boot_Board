@@ -62,10 +62,10 @@
         <table class="table table-bordered table-condensed">
             <tr>
                 <td class="mid" width="100">댓글</td>
-                <td width="700">
+                <td>
                     <textarea class="form-control" name="comment" rows="2"></textarea>
                 </td>
-                <td><input type="text" name="postId" value="${posts.getPostId()}" readonly></td>
+                <td width="100px"><textarea class="form-control" name="postId" rows="2" readonly>${posts.getPostId()}</textarea></td>
             </tr>
         </table>
         <button type="submit" class="btn btn-primary">등록</button>
