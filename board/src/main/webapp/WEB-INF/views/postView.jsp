@@ -63,7 +63,7 @@
             <tr>
                 <td class="mid" width="100">댓글</td>
                 <td>
-                    <textarea class="form-control" name="comment" rows="2"></textarea>
+                    <textarea class="form-control" name="content" rows="2"></textarea>
                 </td>
                 <td width="100px"><textarea class="form-control" name="postId" rows="2" readonly>${posts.getPostId()}</textarea></td>
             </tr>

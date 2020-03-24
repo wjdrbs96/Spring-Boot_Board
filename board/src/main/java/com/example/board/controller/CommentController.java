@@ -7,6 +7,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -15,7 +18,13 @@ public class CommentController {
     @RequestMapping(value = "comment/view", method = RequestMethod.GET)
     public String insertAllCommentView(Model model,
                                        @RequestParam("postId") int postId,
-                                       @RequestParam("comment") String comment) throws Exception {
+                                       @RequestParam("content") String content) throws Exception {
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Comment comment = new Comment();
+        comment.setPostId(postId);
+        comment.setContent(content);
+        comment.setCreateDateTime(sdf.format(new Date()));
 
         CommentDAO.commentInsert(comment, postId);
         List<Comment> list = CommentDAO.findAllComment(postId);
@@ -35,9 +44,10 @@ public class CommentController {
 
     @RequestMapping(value = "comment/delete", method = RequestMethod.GET)
     public String deleteComment(@RequestParam("commentId") int commentId) throws Exception {
-        System.out.println(commentId);
         Comment comment = CommentDAO.findOneComment(commentId);
-        CommentDAO.postCommentDelete(comment.getPostId());
+        CommentDAO.CommentDelete(commentId);
         return "redirect:/comment/list?postId=" + comment.getPostId();
     }
+
+
 }

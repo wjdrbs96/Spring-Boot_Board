@@ -12,17 +12,18 @@ import java.util.List;
 
 public class CommentDAO {
 
-    public static void commentInsert(String comment, int postID) throws Exception {
+    public static void commentInsert(Comment comment, int postID) throws Exception {
         Post post = PostDAO.findOnePost(postID);
 
-        String sql = "insert into comment(postId, memberId, content) " +
-                     "values(?, ?, ?)";
+        String sql = "insert into comment(postId, memberId, content, createDateTime) " +
+                     "values(?, ?, ?, ?)";
 
         try (Connection connection = DB.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setLong(1, post.getPostId());
             statement.setLong(2, post.getMemberId());
-            statement.setString(3, comment);
+            statement.setString(3, comment.getContent());
+            statement.setString(4, comment.getCreateDateTime());
             statement.executeUpdate();
         }
     }
@@ -43,6 +44,7 @@ public class CommentDAO {
                     comment.setPostId(resultSet.getLong("postId"));
                     comment.setMemberId(resultSet.getLong("memberId"));
                     comment.setContent(resultSet.getString("content"));
+                    comment.setCreateDateTime(resultSet.getString("createDateTime"));
                     list.add(comment);
                 }
                 return list;
@@ -50,13 +52,24 @@ public class CommentDAO {
         }
     }
 
-    public static void postCommentDelete(long postId) throws Exception{
+    public static void postCommentAllDelete(int postId) throws Exception {
         String sql = "delete from comment " +
                      "where postId = ?";
 
         try (Connection connection = DB.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
              statement.setLong(1, postId);
+             statement.executeUpdate();
+        }
+    }
+
+    public static void CommentDelete(int commentId) throws Exception {
+        String sql = "delete from comment " +
+                     "where commentId = ?";
+
+        try (Connection connection = DB.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+             statement.setLong(1, commentId);
              statement.executeUpdate();
         }
     }

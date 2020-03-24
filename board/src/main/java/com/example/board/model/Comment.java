@@ -7,7 +7,7 @@ public class Comment {
     long postId;
     long memberId;
     String content;
-    Date createDateTime;
+    String createDateTime;
 
     public long getCommentId() {
         return commentId;
@@ -41,11 +41,11 @@ public class Comment {
         this.content = content;
     }
 
-    public Date getCreateDateTime() {
+    public String getCreateDateTime() {
         return createDateTime;
     }
 
-    public void setCreateDateTime(Date createDateTime) {
+    public void setCreateDateTime(String createDateTime) {
         this.createDateTime = createDateTime;
     }
 

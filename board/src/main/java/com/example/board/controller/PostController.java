@@ -186,14 +186,10 @@ public class PostController {
 
     @RequestMapping(value = "post/comment/delete", method = RequestMethod.GET)
     public String postCommentDelete(@RequestParam("postId") int postId) throws Exception {
-        CommentDAO.postCommentDelete(postId);
+        CommentDAO.postCommentAllDelete(postId);
         return "redirect:/post/list";
     }
 
-    @RequestMapping("test")
-    public String test() {
-        return "nav";
-    }
 
 
 }

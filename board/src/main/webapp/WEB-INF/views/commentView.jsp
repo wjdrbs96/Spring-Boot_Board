@@ -25,12 +25,11 @@
             <tr>
                 <th>${comment.getCommentId()}</th>
                 <th>${comment.getContent()}</th>
-                <th>시간</th>
+                <th>${comment.getCreateDateTime()}</th>
                 <th><a href="http://localhost:8081/comment/delete?commentId=${comment.getCommentId()}">삭제</a></th>
             </tr>
         </c:forEach>
     </table>
-    <a href="javascript:window.history.back()" class="btn btn-info">뒤로가기</a>
     <a href="http://localhost:8081/post/View?postId=${postId}" class="btn btn-info">게시글로 가기</a>
 </div>
 
