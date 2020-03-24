@@ -18,9 +18,10 @@
     </div>
     <hr>
     <form method="get">
-        <h3><c:if test="${errorMsg != null}">
-            <span class="error">${errorMsg}</span>
-        </c:if>
+        <h3>
+            <c:if test="${errorMsg != null}">
+                <span class="error">${errorMsg}</span>
+            </c:if>
         </h3>
         <div>
             <a href="http://localhost:8081/find/password" class="btn btn-info">비밀번호 찾기</a>

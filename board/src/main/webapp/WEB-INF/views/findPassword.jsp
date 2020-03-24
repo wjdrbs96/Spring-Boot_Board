@@ -34,6 +34,7 @@
 
         <hr>
         <div>
+            <a href="http://localhost:8081/login" class="btn btn-info">로그인</a>
             <button class="btn btn-primary" type="submit" onclick="validate();">비밀번호 찾기</button>
         </div>
     </form>

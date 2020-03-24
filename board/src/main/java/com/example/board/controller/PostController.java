@@ -190,6 +190,8 @@ public class PostController {
         return "redirect:/post/list";
     }
 
-
-
+    @RequestMapping(value = "/notice", method = RequestMethod.GET)
+    public String notice() {
+        return "notice";
+    }
 }

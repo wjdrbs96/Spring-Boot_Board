@@ -66,7 +66,7 @@
                     <a class="nav-link" href="http://localhost:8081/logout">Logout</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="">공지사항</a>
+                    <a class="nav-link" href="http://localhost:8081/notice">공지사항</a>
                 </li>
 
                 <li class="nav-item dropdown active">

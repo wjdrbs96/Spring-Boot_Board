@@ -24,9 +24,6 @@
             <a href="http://localhost:8081/login" class="btn btn-info">로그인</a>
         </div>
     </form>
-    <c:if test="${errorMsg != null}">
-        <span class="error">${errorMsg}</span>
-    </c:if>
 </div>
 
 </body>
