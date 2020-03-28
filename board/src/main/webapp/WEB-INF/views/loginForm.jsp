@@ -47,11 +47,11 @@
 <form method="post">
   <div class="form-group">
     <label>사용자 아이디</label>
-    <input type="text" class="form-control" name="userid" />
+    <input type="text" class="form-control" name="userid" placeholder="아이디를 입력하세요."/>
   </div>
   <div class="form-group">
     <label>비밀번호</label>
-    <input type="password" class="form-control" name="password" />
+    <input type="password" class="form-control" name="password" placeholder="비밀번호를 입력하세요."/>
   </div>
   <div class="checkbox">
     <label>
