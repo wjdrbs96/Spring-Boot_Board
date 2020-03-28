@@ -37,33 +37,33 @@
 <body>
 
 <div class="container">
-    <h1>회원가입</h1>
+    <h1 style="color: #0000FF;">회원가입</h1>
     <hr />
 
     <form action="http://localhost:8081/register" method="post">
         <div class="form-group">
             <label>사용자 아이디</label>
-            <input type="text" class="form-control" name="loginId" value="${loginId}">
+            <input type="text" class="form-control" name="loginId" value="${loginId}" placeholder="아이디를 입력하세요.">
         </div>
         <div class="form-group">
-            <label>비밀번호1</label>
-            <input type="password" class="form-control" name="password1" value="${password1}">
+            <label>비밀번호</label>
+            <input type="password" class="form-control" name="password1" value="${password1}" placeholder="비밀번호를 입력하세요.">
         </div>
         <div class="form-group">
-            <label>비밀번호2</label>
-            <input type="password" class="form-control" name="password2" value="${password2}" />
+            <label>비밀번호 재확인</label>
+            <input type="password" class="form-control" name="password2" value="${password2}" placeholder="비밀번호 재입력하세요."/>
         </div>
         <div class="form-group">
             <label>이름</label>
-            <input type="text" class="form-control" name="name" value="${name}" />
+            <input type="text" class="form-control" name="name" value="${name}" placeholder="이름을 입력하세요."/>
         </div>
         <div class="form-group">
             <label>닉네임</label>
-            <input type="text" class="form-control" name="nickname" value="${nickname}" />
+            <input type="text" class="form-control" name="nickname" value="${nickname}" placeholder="별명을 입력하세요."/>
         </div>
         <div class="form-group">
             <label>이메일</label>
-            <input type="email" class="form-control" name="email" value="${email}" />
+            <input type="email" class="form-control" name="email" value="${email}" placeholder="이메일을 입력하세요."/>
         </div>
 
         <button type="submit" class="btn btn-primary">

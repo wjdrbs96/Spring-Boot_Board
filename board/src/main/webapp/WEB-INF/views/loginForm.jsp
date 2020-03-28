@@ -41,7 +41,7 @@
 
 <div class="container">
 
-<h1>로그인</h1>
+<h1 style="color: #0000FF;">로그인</h1>
 <hr />
 
 <form method="post">
