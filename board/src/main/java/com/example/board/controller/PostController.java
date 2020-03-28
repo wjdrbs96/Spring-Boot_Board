@@ -23,7 +23,7 @@ public class PostController {
     @RequestMapping(value = "post/list", method = RequestMethod.GET)
     public String getAllPost(Model model,
                              @RequestParam(value = "page", defaultValue = "1") int page,
-                             @RequestParam(value = "pageSize", defaultValue = "5") int pageSize) throws Exception {
+                             @RequestParam(value = "pageSize", defaultValue = "7") int pageSize) throws Exception {
 
         // 페이지네이션 포함
         int totalPostCount = PostDAO.postAllCount();               // 전체 게시글 수
@@ -45,12 +45,12 @@ public class PostController {
         model.addAttribute("select", select);
 
         if (select.equals("title")) {
-            List<Post> posts = PostDAO.postFindByTitle(srchText, 1, 4);
+            List<Post> posts = PostDAO.postFindByTitle(srchText, 1, 7);
             model.addAttribute("posts", posts);
             return "postMainTitle";
         }
         else if (select.equals("nickname")) {
-            List<Post> posts = PostDAO.postFindByNickName(srchText, 1, 4);
+            List<Post> posts = PostDAO.postFindByNickName(srchText, 1, 7);
             model.addAttribute("posts", posts);
             return "postMainNickName";
         }

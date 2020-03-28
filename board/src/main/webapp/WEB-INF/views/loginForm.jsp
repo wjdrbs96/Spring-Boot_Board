@@ -41,7 +41,7 @@
 
 <div class="container">
 
-<h1 style="color: #0000FF;">로그인</h1>
+<a href="http://localhost:8081/login"><h1 style="color: #0000FF;">로그인</h1></a>
 <hr />
 
 <form method="post">
