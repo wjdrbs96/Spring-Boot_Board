@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!-- 회원 가입을 하는 페이지 -->
-
 
 <!DOCTYPE html>
 <html>
@@ -37,7 +35,7 @@
 <body>
 
 <div class="container">
-    <h1 style="color: #0000FF;">회원가입</h1>
+    <a href="http://localhost:8081/register"><h1 style="color: #0000FF;">회원가입</h1></a>
     <hr />
 
     <form action="http://localhost:8081/register" method="post">

@@ -75,6 +75,61 @@ public class MemberController {
         return "redirect:/login";
     }
 
+    @RequestMapping(value = "register", method = RequestMethod.GET)
+    public String register() {
+        return "register1";
+    }
+
+    @RequestMapping(value = "register", method = RequestMethod.POST)
+    public String register(Model model,
+                           @RequestParam("loginId") String loginId,
+                           @RequestParam("password1") String password1,
+                           @RequestParam("password2") String password2,
+                           @RequestParam("name") String name,
+                           @RequestParam("nickname") String nickname,
+                           @RequestParam("email") String email) throws Exception {
+        String error = "";
+        model.addAttribute("loginId", loginId);
+        model.addAttribute("password1", password1);
+        model.addAttribute("password2", password2);
+        model.addAttribute("name", name);
+        model.addAttribute("nickname", nickname);
+        model.addAttribute("email", email);
+
+        if (loginId == null || loginId.length() == 0) {
+            error = "사용자 아이디를 입력하세요";
+        }
+        else if (password1 == null || password1.length() == 0) {
+            error = "비밀번호1를 입력하세요";
+        }
+        else if (password2 == null || password2.length() == 0) {
+            error = "비밀번호2를 입력하세요";
+        }
+        else if (name == null || name.length() == 0) {
+            error = "이름을 입력하세요";
+        }
+        else if (nickname == null || nickname.length() == 0) {
+            error = "닉네임을 입력하세요";
+        }
+        else if (!password1.equals(password2)) {
+            error = "비밀번호 불일치";
+        }
+        else if (email == null || email.length() == 0) {
+            error = "이메일 주소를 입력하세요";
+        }
+        else {
+            if (MemberDAO.isSameCheckLoginId(loginId) == 0) {
+                Member member = new Member(loginId, password1, name, nickname, email);
+                MemberDAO.memberRegister(member);
+                return "redirect:/login";
+            }
+
+            error = "아이디가 중복됩니다";
+        }
+        model.addAttribute("error", error);
+        return "register1";
+    }
+
     @RequestMapping(value = "/member/update", method = RequestMethod.GET)
     public String memberUpdate(Model model,
                                @RequestParam("loginId") String loginId) throws SQLException {

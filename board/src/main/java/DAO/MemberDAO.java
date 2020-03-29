@@ -2,8 +2,6 @@ package DAO;
 
 import com.example.board.config.DB;
 import com.example.board.model.Member;
-import com.example.board.model.Post;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -36,6 +34,23 @@ public class MemberDAO {
             }
         }
 
+    }
+
+    public static int isSameCheckLoginId(String loginId) throws SQLException {
+        String sql = "select count(*) " +
+                     "from member " +
+                     "where loginId = ?";
+
+        try(Connection connection = DB.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, loginId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    return 1;
+                }
+            }
+        }
+        return 0;
     }
 
     public static Member findOneMember(String loginId) throws SQLException {
