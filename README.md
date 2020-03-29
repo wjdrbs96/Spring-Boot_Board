@@ -5,7 +5,7 @@
 
 
 ## View
-![Login](./img/login.PNG)
+![Login](./img/Login.PNG)
 ---
 ![Main](./img/PostMain.PNG)
 ---
