@@ -35,7 +35,7 @@
 
 <div class="container">
 
-    <h1>게시글 수정</h1>
+    <h1>게시글 보기</h1>
 
     <form action="http://localhost:8081/post/update?postId=${posts.getPostId()}" method="POST">
         <table class="table table-bordered table-condensed">
