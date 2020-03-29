@@ -7,18 +7,19 @@
 ## View
 ![Login](./img/login.PNG)
 ---
-![Main](./img/Postmain.png)
+![Main](./img/PostMain.PNG)
 ---
-![Product](./img/PostView.png)
+![View](./img/PostView.PNG)
 ---
-![Cart](./img/WritePost.png)
+![Write](./img/WritePost.PNG)
 ---
-![Order](./img/UpdatePost.png)
+![Update](./img/UpdatePost.PNG)
 
 ## Use
 * Spring Boot
 * Tomcat
-* JSP & JSTL
+* JSP
+* JDBC 
 * MySQL
 
 
